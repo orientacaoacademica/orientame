@@ -35,9 +35,16 @@
   </div>
   <div id="root"></div>
 
-  <!-- React via CDN (jsdelivr — sem redirecionamento) -->
+  <!-- React via CDN -->
   <script crossorigin src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+
+  <!-- Mammoth para leitura de DOCX -->
+  <script src="https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js"></script>
+  <script>window.mammoth = mammoth;</script>
+
+  <!-- PDF.js -->
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
 
   <!-- App compilado -->
   <script src="app.js"></script>
