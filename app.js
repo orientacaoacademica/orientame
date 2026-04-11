@@ -868,7 +868,7 @@ function OrientaMe(){var _advisorProfile$name,_session$name2;const[session,setSe
 const[toasts,setToasts]=useState([]);// [{id, msg, type:"success"|"error"|"info"}]
 const addToast=(msg,type="success")=>{const id=Date.now();setToasts(prev=>[...prev,{id,msg,type}]);setTimeout(()=>setToasts(prev=>prev.filter(t=>t.id!==id)),3500);};const R=useResponsive();// Sincronizar COLORS global com o tema atual
 COLORS=THEMES[theme];_currentTheme=theme;const toggleTheme=async()=>{const next=theme==="dark"?"light":"dark";setTheme(next);await safeSet("orientame_theme_v1",next);};// ── Restore session ────────────────────────────────────────────────────────
-useEffect(()=>{(async()=>{const raw=await safeGet(SESSION_KEY);if(raw){try{setSession(JSON.parse(raw));}catch{}}const planRaw=await safeGet(FREEMIUM_KEY);if(planRaw){try{const p=JSON.parse(planRaw);if(p.profile)setAdvisorProfile(p.profile);}catch{}}// Plano sempre vem do Supabase — não do localStorage
+useEffect(()=>{(async()=>{const raw=await safeGet(SESSION_KEY);if(raw){try{setSession(JSON.parse(raw));}catch{}}const planRaw=await safeGet(FREEMIUM_KEY);if(planRaw){try{const p=JSON.parse(planRaw);if(p.profile)setAdvisorProfile(p.profile);if(p.plan)setPlan(p.plan);}catch{}}// Plano vem do Supabase, mas o local serve como fallback imediato no boot
 // Carregar foto separadamente (pode ser grande em base64)
 const photoRaw=await safeGet(PHOTO_KEY);if(photoRaw)setAdvisorProfile(prev=>({...prev,photo:photoRaw}));// Carregar tema salvo
 const themeRaw=await safeGet("orientame_theme_v1");if(themeRaw==="light"||themeRaw==="dark"){setTheme(themeRaw);COLORS=THEMES[themeRaw];_currentTheme=themeRaw;}setSessionChecked(true);})();},[]);const handleLogin=async sess=>{// Plano sempre vem do Supabase — fonte única de verdade
